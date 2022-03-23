@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<style>
+    .food {
+        margin: 20px;
+    }
+</style>
+
+
+
+
+<div class="food">
+
+<h3>Our Burger Menu</h3>
+{% for i in burgers %}
+
+<ul>
+    <li>{{i}}</li>
+</ul>
+
+{% endfor %}
+</div>
+
+
+<div class="food">
+
+<h3>Our Salad Menu</h3>
+{% for i in salads %}
+
+<ul>
+    <li>{{i}}</li>
+</ul>
+
+{% endfor %}
+</div>
+
+
+<div class="food">
+
+<h3>Our Main Dish Menu</h3>
+{% for i in main_dishes %}
+
+<ul>
+    <li>{{i}}</li>
+    <span>Salads Included: 
+        {% for j in i.salads.all %}
+         {{j}}
+        {% endfor %}
+    </span>
+</ul>
+
+{% endfor %}
+</div>
+
+{% endblock %}

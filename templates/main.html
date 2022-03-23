@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+    }
+
+    body {
+        background: white;
+    }
+
+    .header {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 0px;
+        margin-bottom:20px;
+        background:rgb(0, 0, 0);
+        color: white;
+        border-bottom: 2px solid violet;
+    }
+
+    
+</style>
+<body>
+    <div class="header">
+        <div class="element">
+            Menu
+        </div>
+        <div class="element">
+            Prices
+        </div>
+        <div class="element">
+            About
+        </div>
+        <div class="element">
+            Account
+        </div>
+    </div>
+   
+    {% block content %}
+
+    {% endblock %}
+    
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+{% if burger %}
+{% for i in burger %}
+<h1>{{ i.name }}</h1>
+{% endfor %}
+{% endif %}
+
+{% if salad %}
+{% for i in salad %}
+<h1>{{ i.name }}</h1>
+{% endfor %}
+{% endif %}
+
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta suscipit quis quam adipisci quasi deserunt doloremque voluptatibus aliquid sit, ratione quod, libero numquam obcaecati earum fugiat mollitia, dolore non illum atque expedita accusamus aliquam placeat quo? Quo veritatis neque laborum sapiente. Tempora voluptates dicta magni dignissimos minus molestias. Eveniet ducimus iusto illo autem totam harum ullam odio at quidem, laborum, nulla maiores reiciendis rem alias voluptas, pariatur quaerat id nihil dolore recusandae iste. Soluta laborum qui itaque quas reprehenderit sed sapiente, illo minima numquam blanditiis temporibus eius amet laboriosam! Consequuntur possimus porro illo architecto saepe quos adipisci repellendus obcaecati laborum.</p>
+
+{% endblock %}
