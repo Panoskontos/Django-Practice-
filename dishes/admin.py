@@ -5,3 +5,5 @@ from .models import *
 admin.site.register(Burger)
 admin.site.register(Salad)
 admin.site.register(MainDish)
+admin.site.register(Tag)
+admin.site.register(MainDishTag)

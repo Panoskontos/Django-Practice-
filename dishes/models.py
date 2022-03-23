@@ -32,3 +32,17 @@ class MainDish(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=200)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    def __str__(self):
+        return self.name
+
+
+# We will create an intermediary table
+class MainDishTag(models.Model):
+    maindish = models.ForeignKey(MainDish, on_delete=models.PROTECT)
+    tags = models.ManyToManyField(Tag)

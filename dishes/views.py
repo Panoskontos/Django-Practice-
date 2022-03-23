@@ -8,12 +8,14 @@ def dashboard(request):
     burgers = Burger.objects.all()
     salads = Salad.objects.all()
     main_dishes = MainDish.objects.all()
+    main_dishes_tag = MainDishTag.objects.all()
 
     # Data you want to connect
     context = {
         'burgers': burgers,
         'salads': salads,
         'main_dishes': main_dishes,
+        'main_dishes_tag': main_dishes_tag,
 
     }
     # connect with url
