@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from pyexpat import model
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from dishes.models import *
+from django.views.generic import ListView
+from .forms import *
 # Create your views here.
 
 
@@ -36,3 +40,28 @@ def singles(request, pk):
     }
     # connect with url
     return render(request, 'dishes/single-dish.html', context)
+
+
+def login(request):
+    if request.method == 'POST':
+        form = SaladForm(request.POST)
+        if form.is_valid():
+            print('form is valid')
+            return HttpResponseRedirect('/dishes/thankyou')
+    else:
+        form = SaladForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'dishes/login.html', context)
+
+
+def thankyou(request):
+    return render(request, 'dishes/thankyou.html')
+
+
+class SaladList(ListView):
+    template_name = "salad_list.html"
+    context_object_name = "salads"
+    model = Salad
+

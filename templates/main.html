@@ -27,12 +27,18 @@
         border-bottom: 2px solid violet;
     }
 
+    footer {
+        margin-top: 60%;
+    }
+
     
 </style>
 <body>
     <div class="header">
         <div class="element">
-            Menu
+            <a style="color:white" href="{% url 'dashboard' %}">
+                Menu
+            </a>
         </div>
         <div class="element">
             Prices
@@ -49,5 +55,8 @@
 
     {% endblock %}
     
+   <footer>
+       My footer
+   </footer>
 </body>
 </html>

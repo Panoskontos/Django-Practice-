@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+
+
+<form action="" method="post">
+    
+    {% csrf_token %}
+    
+    {{form.as_p}}
+
+    
+    {{form.errors}}
+
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+{% endblock %}
