@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<p>Are you sure you want to delet the {{product.name}}</p>
+
+<br>
+<form action="" method="post">
+    {% csrf_token %}
+
+
+    <button type="submit">Delete</button>
+    <br>
+    <br>
+    <a href="{% url 'products' %}">Cancel</a>
+</form>
+
+{% endblock %}

@@ -215,3 +215,34 @@ def create_product(request):
         'form': form,
     }
     return render(request, 'dishes/create-product.html', context)
+
+
+# Update
+# Almost same with Create
+def update_product(request, pk):
+
+    product = Product.objects.get(id=pk)
+    form = ProductForm(instance=product)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('products')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'dishes/create-product.html', context)
+
+# Delete
+
+
+def delete_product(request, pk):
+    product = Product.objects.get(id=pk)
+    if request.method == 'POST':
+        product.delete()
+        return redirect('success', message='Item was deleted')
+    context = {
+        'product': product,
+    }
+    return render(request, 'dishes/delete-product.html', context)

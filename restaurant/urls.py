@@ -25,7 +25,7 @@ from dishes import views
 
 
 urlpatterns = [
-    path('', views.dashboard, name="dashboard"),
+    path('', views.products, name="dashboard"),
     path('admin/', admin.site.urls),
     # path('api/', include(router.urls)),
     path('dishes/', include('dishes.urls')),
