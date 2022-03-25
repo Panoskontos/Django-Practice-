@@ -207,7 +207,8 @@ def create_product(request):
         # print(request.POST)
         form = ProductForm(request.POST)
         if form.is_valid():
-            form.save()
+            product = form.save(commit=False)
+            product.save()
             return redirect('products')
             # or redirect success
 
