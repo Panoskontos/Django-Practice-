@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<ul>
+    {% for i in products %}
+    <li>
+        {{i.name}} - {{i.price}} €
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

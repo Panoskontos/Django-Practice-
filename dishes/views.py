@@ -85,22 +85,19 @@ class PersonList(ListView):
     model = Person
     context_object_name = 'people'
     paginate_by = 10
-    # ordering = ['name']
-    # you can search for other attributes to customize
     template_name = 'dishes/people.html'
+    # you can search for other attributes to customize
 
 
 class PersonDetail(DetailView):
     # Detail
     model = Person
     context_object_name = 'person'
-    # pk_url_kwargs = 'name'
 
 
 class PersonCreate(CreateView):
     # Create
     model = Person
-    # fields = ['name', 'surname']
     success_url = reverse_lazy('people')
     form_class = PersonForm
 
@@ -109,14 +106,12 @@ class PersonUpdate(UpdateView):
     # Update
     model = Person
     fields = '__all__'
-    # form_class = PersonForm
-
     # It is fields or form_class
     success_url = reverse_lazy('people')
 
 
 class PersonDelete(DeleteView):
-    # Update
+    # Delete
     model = Person
     context_object_name = 'person'
     success_url = reverse_lazy('people')
@@ -125,3 +120,98 @@ class PersonDelete(DeleteView):
 # All class based views inherit from View, this is how you can customize
 # class PersonView(View):
 #     pass
+
+
+# Success and fail views
+def success(request, message=None):
+    return render(request, 'dishes/success.html', {'message': message})
+
+
+def fail(request, message=None):
+    return render(request, 'dishes/fail.html', {'message': message})
+
+# use them with " return redirect('success', message='blah blah')
+
+
+# Upload Files
+def upload_files(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            return redirect('success', message='File was successfully saved ')
+    else:
+        form = UploadFileForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'dishes/import_file.html', context)
+
+
+# Uploading a book
+def uniqueName(name):
+    name = name + '-' + str(uuid.uuid1())
+    return name
+
+
+def upload_book(request):
+    books = Book.objects.all()
+    if request.method == 'POST':
+        form = UploadBook(request.POST, request.FILES)
+        if form.is_valid():
+
+            formFile = request.FILES['book']
+
+            # It is good practice to have uuid with files
+            formFile.name = uniqueName(formFile.name)
+
+            formTitle = request.POST.get('title')
+            formAuthor = request.POST.get('author')
+            # Save in books
+            book = Book(title=formTitle, book=formFile, author=formAuthor)
+            book.save()
+
+            return redirect('thankyou')
+    else:
+        form = UploadBook()
+    context = {
+        'form': form,
+        'books': books,
+    }
+    return render(request, 'dishes/books.html', context)
+
+
+# Read
+# List
+def products(request):
+    products = Product.objects.all()
+    context = {
+        'products': products,
+    }
+    return render(request, 'dishes/products.html', context)
+
+# Single
+
+
+def product(request, pk):
+    product = Product.objects.get(id=pk)
+    context = {
+        'product': product,
+    }
+    return render(request, 'dishes/product.html', context)
+
+
+# Create
+def create_product(request):
+    form = ProductForm()
+    if request.method == 'POST':
+        # print(request.POST)
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('products')
+            # or redirect success
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'dishes/create-product.html', context)

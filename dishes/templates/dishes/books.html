@@ -1,0 +1,51 @@
+
+
+
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    
+{{form.as_p}}
+
+
+<button type="submit">Submit</button>
+</form>
+
+
+<br>
+
+<table>
+    <tbody>
+    
+</tbody>
+</table>
+    
+
+<table>
+    
+  <tr>
+    <th>Title</th>
+    <th>Book</th>
+    <th>Author</th>
+  </tr>
+  {% for i in books %}
+
+    <tr>
+        <td>
+            {{i.title}}
+        </td>
+        <td>
+            {{i.book}}
+        </td>
+        <td>
+            {{i.author}}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

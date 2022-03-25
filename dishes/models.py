@@ -54,3 +54,19 @@ class Person(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    book = models.FileField(blank=True)
+    author = models.CharField(max_length=100)
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.IntegerField()
+    STATUS = (
+        ('Out for Delivery', 'Out for Delivery'),
+        ('Delivered', 'delivered'),
+    )
+    status = models.CharField(max_length=100, choices=STATUS)
