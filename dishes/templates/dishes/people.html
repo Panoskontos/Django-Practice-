@@ -2,7 +2,22 @@
 <ul>
     {% for i in people %}
     <li>
-        {{i}}
+        <a href="{% url 'person-update' i.id %}">
+
+            {{i}}
+        </a>
+
+        <span style="margin-left: 30px;">
+            <a href="{% url 'people-delete' i.id %}">
+                Delete
+            </a>
+        </span>
     </li>
     {% endfor %}
 </ul>
+
+<div>
+    <button type="submit"><a href="{% url 'person-create' %}">
+        Add More People
+    </a></button>
+</div>

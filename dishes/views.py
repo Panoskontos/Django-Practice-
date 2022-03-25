@@ -84,7 +84,7 @@ class PersonList(ListView):
     # List
     model = Person
     context_object_name = 'people'
-    paginate_by = 5
+    paginate_by = 10
     # ordering = ['name']
     # you can search for other attributes to customize
     template_name = 'dishes/people.html'
@@ -94,20 +94,24 @@ class PersonDetail(DetailView):
     # Detail
     model = Person
     context_object_name = 'person'
-    pk_url_kwargs = 'name'
+    # pk_url_kwargs = 'name'
 
 
 class PersonCreate(CreateView):
     # Create
     model = Person
-    fields = ['name', 'surname']
+    # fields = ['name', 'surname']
     success_url = reverse_lazy('people')
+    form_class = PersonForm
 
 
 class PersonUpdate(UpdateView):
     # Update
     model = Person
-    fields = ['name', 'surname']
+    fields = '__all__'
+    # form_class = PersonForm
+
+    # It is fields or form_class
     success_url = reverse_lazy('people')
 
 
