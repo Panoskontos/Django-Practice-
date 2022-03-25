@@ -2,7 +2,14 @@ from pyexpat import model
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from dishes.models import *
-from django.views.generic import ListView
+
+# Imports for class based views
+from django.views.generic import ListView, View
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+# Redirecting
+from django.urls import reverse_lazy
+
 from .forms import *
 # Create your views here.
 
@@ -60,8 +67,57 @@ def thankyou(request):
     return render(request, 'dishes/thankyou.html')
 
 
+# Creating CRUD with 3 lines
 class SaladList(ListView):
     template_name = "salad_list.html"
     context_object_name = "salads"
     model = Salad
 
+
+# Class Based Views for Person
+# You won't focus on the code
+# However you need them for job
+# Don't use them to use them
+# Use what is comfortable
+
+class PersonList(ListView):
+    # List
+    model = Person
+    context_object_name = 'people'
+    paginate_by = 5
+    # ordering = ['name']
+    # you can search for other attributes to customize
+    template_name = 'dishes/people.html'
+
+
+class PersonDetail(DetailView):
+    # Detail
+    model = Person
+    context_object_name = 'person'
+    pk_url_kwargs = 'name'
+
+
+class PersonCreate(CreateView):
+    # Create
+    model = Person
+    fields = ['name', 'surname']
+    success_url = reverse_lazy('people')
+
+
+class PersonUpdate(UpdateView):
+    # Update
+    model = Person
+    fields = ['name', 'surname']
+    success_url = reverse_lazy('people')
+
+
+class PersonDelete(DeleteView):
+    # Update
+    model = Person
+    context_object_name = 'person'
+    success_url = reverse_lazy('people')
+
+
+# All class based views inherit from View, this is how you can customize
+# class PersonView(View):
+#     pass
